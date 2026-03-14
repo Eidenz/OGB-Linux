@@ -10,6 +10,7 @@
     "watch": "webpack --watch --config src/main/webpack.config.js --config src/frontend/webpack.config.js",
     "build": "webpack --config src/main/webpack.config.js --config src/frontend/webpack.config.js",
     "rebuild": "pnpm run build && pnpm run start",
+    "dist:linux": "pnpm run build && pnpm exec electron-builder --linux AppImage rpm",
     "typecheck": "pnpm exec tsc -p src/main/tsconfig.json --noEmit && pnpm exec tsc -p src/frontend/tsconfig.json --noEmit"
   },
   "repository": "https://github.com/OscToys/OscGoesBrrr",
@@ -89,9 +90,20 @@
       "artifactName": "OscGoesBrrr-${version}.exe"
     },
     "linux": {
-      "target": "AppImage",
+      "target": [
+        "AppImage",
+        "rpm"
+      ],
       "icon": "src/icons/ogb-logo.png",
-      "artifactName": "OscGoesBrrr.AppImage"
+      "category": "Utility",
+      "artifactName": "OscGoesBrrr-${version}.${ext}"
+    },
+    "rpm": {
+      "fpm": [
+        "--rpm-rpmbuild-define",
+        "_build_id_links none"
+      ],
+      "maintainer": "Eidenz"
     },
     "nsis": {
       "installerIcon": "src/icons/ogb-installer.ico"
