@@ -1,6 +1,6 @@
 {
   "name": "OscGoesBrrr",
-  "version": "2.1.4",
+  "version": "2.1.7",
   "type": "module",
   "description": "Haptics for VRChat",
   "main": "electron-main.js",
